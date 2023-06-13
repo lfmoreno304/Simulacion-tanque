@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 class Tank:
-    def __init__(self, volumen):
+    def __init__(self, volumen,nivel):
         self.volumen = volumen
-        self.nivel = 0
+        self.nivel = nivel
         self.niveles = []
         self.estados = []
         self.tiempos = []
@@ -15,8 +15,7 @@ class Tank:
         
         while time.time() - tiempo_inicial < duracion:
             self.nivel += tasa_llenado
-            if self.nivel > self.volumen:
-                self.nivel = self.volumen
+            
             self.niveles.append(self.nivel)
             self.estados.append(self.obtener_estado())
             self.tiempos.append(time.time() - tiempo_inicial)
@@ -75,12 +74,13 @@ class Tank:
 
 # Configuración del tanque
 volumen_tanque = 100  # Volumen del tanque en litros
-tasa_llenado = 5      # Tasa de llenado en litros por segundo
-tasa_descarga = 5     # Tasa de descarga en litros por segundo
-duracion_simulacion = 30  # Duración estimada de la simulación en segundos
+tasa_llenado = 5     # Tasa de llenado en litros por segundo
+tasa_descarga = 3     # Tasa de descarga en litros por segundo
+duracion_simulacion = 15  # Duración estimada de la simulación en segundos
+nivel = 0 # Nivel de agua del tanque
 
 # Crear instancia del tanque
-tanque = Tank(volumen_tanque)
+tanque = Tank(volumen_tanque,nivel)
 
 # Llenar y descargar el tanque durante la duración de la simulación
 tanque.llenar_descargar(tasa_llenado, tasa_descarga, duracion_simulacion)
